@@ -35,4 +35,28 @@ public interface KingdeeDataSetService {
      * @throws Exception 异常
      */
     List<MultiDailyReportData> getMultiDailyReportData(MultiDailyReportRequest request, String fieldKeys) throws Exception;
+
+    /**
+     * 查询物料基本信息
+     * @param request 查询请求
+     * @return 物料数据列表（JSON格式）
+     * @throws Exception 异常
+     */
+    String queryMaterials(com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception;
+
+    /**
+     * 查询组织信息
+     * @param request 查询请求
+     * @return 组织数据列表（JSON格式）
+     * @throws Exception 异常
+     */
+    String queryOrganizations(com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception;
+
+    /**
+     * 查询物料分类信息
+     * @param request 查询请求
+     * @return 物料分类数据列表（JSON格式）
+     * @throws Exception 异常
+     */
+    String queryMaterialGroups(com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception;
 } 

@@ -92,6 +92,37 @@ public class KingdeeDataSetController {
      * 获取多账簿日报表数据（使用原始JSON字符串接收）
      * POST /kingdeedataset/multi-daily
      */
+    /**
+     * 查询物料基本信息
+     * POST /kingdeedataset/material/query
+     */
+    @ApiOperation(value = "物料基本信息查询", notes = "查询金蝶云星空物料基本信息，支持过滤条件和分页")
+    @PostMapping(value = "/material/query", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Object queryMaterials(@RequestBody com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception {
+        System.out.println("===== 物料查询请求开始 =====");
+        String result = kingdeeDataSetService.queryMaterials(request);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readTree(result);
+    }
+
+    @ApiOperation(value = "组织信息查询", notes = "查询金蝶云星空组织信息")
+    @PostMapping(value = "/org/query", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Object queryOrganizations(@RequestBody com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception {
+        System.out.println("===== 组织查询请求开始 =====");
+        String result = kingdeeDataSetService.queryOrganizations(request);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readTree(result);
+    }
+
+    @ApiOperation(value = "物料分类查询", notes = "查询金蝶云星空物料分类信息")
+    @PostMapping(value = "/material-group/query", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Object queryMaterialGroups(@RequestBody com.kingdee.webapi.model.MaterialQueryRequest request) throws Exception {
+        System.out.println("===== 物料分类查询请求开始 =====");
+        String result = kingdeeDataSetService.queryMaterialGroups(request);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readTree(result);
+    }
+
     @ApiOperation(value = "多账簿日报表", notes = "查询多账簿的日报表数据，支持按日期、科目、账簿等条件筛选")
     @PostMapping(value = "/multi-daily", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Object getMultiDailyReportRaw(@RequestBody String rawJson) throws Exception {

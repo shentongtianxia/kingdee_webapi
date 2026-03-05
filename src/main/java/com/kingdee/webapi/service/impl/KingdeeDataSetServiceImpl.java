@@ -714,6 +714,116 @@ public class KingdeeDataSetServiceImpl implements KingdeeDataSetService {
      * 格式化打印报表数据，以表格形式展示，并以列表形式输出
      * @param reportCells 报表单元格列表
      */
+    @Override
+    public String queryMaterials(MaterialQueryRequest request) throws Exception {
+        K3CloudApi client = new K3CloudApi();
+        
+        // 默认查询字段，增加了组织名称、分类名称等
+        String fieldKeys = request.getFieldKeys();
+        if (fieldKeys == null || fieldKeys.isEmpty()) {
+            fieldKeys = "FMasterId,FNumber,FName,FSpecification,FBaseUnitId.FName,FMaterialGroup.FName,FUseOrgId.FName,FCreateOrgId.FName,FDescription";
+        }
+        
+        String filterString = request.getFilterString() != null ? request.getFilterString() : "";
+        
+        // 如果是全量查询 (all = true)
+        if (Boolean.TRUE.equals(request.getAll())) {
+            List<List<Object>> allResults = new ArrayList<>();
+            int startRow = 0;
+            int batchSize = 2000; // 金蝶单次建议最大 2000 条
+            
+            while (true) {
+                JSONObject queryParam = new JSONObject();
+                queryParam.put("FormId", "BD_MATERIAL");
+                queryParam.put("FieldKeys", fieldKeys);
+                queryParam.put("FilterString", filterString);
+                queryParam.put("OrderString", "FNumber ASC");
+                queryParam.put("StartRow", startRow);
+                queryParam.put("Limit", batchSize);
+                
+                List<List<Object>> batch = client.executeBillQuery(queryParam.toJSONString());
+                if (batch == null || batch.isEmpty()) {
+                    break;
+                }
+                
+                allResults.addAll(batch);
+                
+                // 如果返回的数据少于 batchSize，说明已经是最后一页
+                if (batch.size() < batchSize) {
+                    break;
+                }
+                
+                startRow += batchSize;
+                
+                // 安全限制：防止数据量过大导致 OOM，这里限制 50000 条，可根据实际情况调整
+                if (allResults.size() >= 50000) {
+                    break;
+                }
+            }
+            
+            JSONObject finalResponse = new JSONObject();
+            finalResponse.put("totalCount", allResults.size());
+            finalResponse.put("data", allResults);
+            return finalResponse.toJSONString();
+        } else {
+            // 普通分页查询
+            JSONObject queryParam = new JSONObject();
+            queryParam.put("FormId", "BD_MATERIAL");
+            queryParam.put("FieldKeys", fieldKeys);
+            queryParam.put("FilterString", filterString);
+            queryParam.put("OrderString", "FNumber ASC");
+            queryParam.put("StartRow", request.getStartRow() != null ? request.getStartRow() : 0);
+            queryParam.put("Limit", request.getLimit() != null ? request.getLimit() : 100);
+            
+            List<List<Object>> result = client.executeBillQuery(queryParam.toJSONString());
+            
+            JSONObject finalResponse = new JSONObject();
+            finalResponse.put("totalCount", result != null ? result.size() : 0);
+            finalResponse.put("data", result);
+            return finalResponse.toJSONString();
+        }
+    }
+
+    /**
+     * 查询组织信息
+     */
+    public String queryOrganizations(MaterialQueryRequest request) throws Exception {
+        K3CloudApi client = new K3CloudApi();
+        String fieldKeys = request.getFieldKeys();
+        if (fieldKeys == null || fieldKeys.isEmpty()) {
+            fieldKeys = "FOrgId,FNumber,FName,FDescription,FOrgFunctions";
+        }
+        
+        JSONObject queryParam = new JSONObject();
+        queryParam.put("FormId", "ORG_Organizations");
+        queryParam.put("FieldKeys", fieldKeys);
+        queryParam.put("FilterString", request.getFilterString() != null ? request.getFilterString() : "");
+        queryParam.put("Limit", request.getLimit() != null ? request.getLimit() : 100);
+        
+        java.util.List<java.util.List<Object>> result = client.executeBillQuery(queryParam.toJSONString());
+        return JSON.toJSONString(result);
+    }
+
+    /**
+     * 查询物料分类信息
+     */
+    public String queryMaterialGroups(MaterialQueryRequest request) throws Exception {
+        K3CloudApi client = new K3CloudApi();
+        String fieldKeys = request.getFieldKeys();
+        if (fieldKeys == null || fieldKeys.isEmpty()) {
+            fieldKeys = "FId,FNumber,FName,FDescription";
+        }
+        
+        JSONObject queryParam = new JSONObject();
+        queryParam.put("FormId", "BD_MATERIALGROUP");
+        queryParam.put("FieldKeys", fieldKeys);
+        queryParam.put("FilterString", request.getFilterString() != null ? request.getFilterString() : "");
+        queryParam.put("Limit", request.getLimit() != null ? request.getLimit() : 100);
+        
+        java.util.List<java.util.List<Object>> result = client.executeBillQuery(queryParam.toJSONString());
+        return JSON.toJSONString(result);
+    }
+
     public List<BalanceReport>   printReport(List<ReportCell> reportCells,Integer type,String billNo,String year,String month,String org) {
 
         HashMap<Object, Object> map = new HashMap<>();
