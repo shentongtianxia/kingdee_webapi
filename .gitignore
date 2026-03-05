@@ -1,0 +1,24 @@
+# Maven
+target/
+pom.xml
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.class
+*.log
+*.jar
+*.war
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+
+# Temporary
+*.tmp
+*.bak

@@ -1,0 +1,29 @@
+{
+    "FieldKeys": "FSUPPLIERID,FROBILLTYPEID,FROBILLNO,FROENTRYSEQ,FMATERIALID,FMATERIALNAME,FMATERIALMODEL,FPLANSTARTDATE,FPLANFINISHDATE,FCONVEYDATE,FFINISHDATE,FPRDUNITID,FPLANQTY,FPURQTY,FSTOCKINQTY,FNOSTOCKINQTY,FPLANFINISHPERCENT,FPICKEDQTY,FSTATUSNAME,FCLOSETYPENAME",
+    "SchemeId": "",
+    "StartRow": 0,
+    "Limit": 2000,
+    "IsVerifyBaseDataField": "true",
+    "FilterString": [],
+    "Model": {
+        "FCtrlItem": "1",
+        "FPurOrgId": {
+            "FNumber": "102"
+        },
+        "FStatus": "3,5,6",
+        "FEndConveyDate": "2026-02-28 00:00:00",
+        "FEndPlanStartDate": "2026-02-28 00:00:00",
+        "FBeginPlanStartDate": "2025-02-01 00:00:00",
+        "FBeginPlanFinishDate": "2025-02-01 00:00:00",
+        "FEndPlanFinishDate": "2026-02-28 00:00:00",
+        "FBeginConveyDate": "2025-02-01 00:00:00",
+        "FROBillType": "93904bf745d84ae0ad08da30949754e0,87035fdb6a31407a8819750df751d233",
+        "FSubOrgId": "2",
+        "FConveyDateInvolve": false,
+        "FStartDateInvolve": true,
+        "FFinishDateInvolve": false
+    }
+}
+
+
+按金蝶的webapi 查出来是空的，条件不知道为什么对应不上！

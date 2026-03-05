@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  kingdee-webapi:
+    build: .
+    container_name: kingdee-webapi
+    ports:
+      - "8082:8080"
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m -XX:+UseG1GC
+    volumes:
+      - ./logs:/app/logs
+      - ./src/main/resources:/app/src/main/resources:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 

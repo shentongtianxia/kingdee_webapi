@@ -1,0 +1,29 @@
+# Maven
+target/
+!target/*.jar
+!target/kingdee-webapi.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# 其他
+README.md
+start.bat 

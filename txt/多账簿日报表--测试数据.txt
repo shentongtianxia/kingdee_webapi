@@ -1,0 +1,43 @@
+{
+    "FieldKeys": "FAccountNumber,FAccountName,FYDayDebitAmount,FYDayCreditAmount,FDebitAmount,FCreditAmount,FBalDebitAmount,FBalCreditAmount,FDebitCount,FCreditCount",
+    "SchemeId": "",
+    "StartRow": 0,
+    "Limit": 2000,
+    "IsVerifyBaseDataField": "true",
+    "FilterString": [],
+    "Model": {
+        "FCURRENCYID": "1",
+        "FSTARTDATE": "2026-01-01 00:00:00",
+        "FENDDATE": "2026-01-31 00:00:00",
+        "FSTARTBALANCELEVEL": "1",
+        "FENDBALANCELEVEL": "1",
+        "FSHOWACCTITEMS": false,
+        "FNOTPOSTVOUCHER": false,
+        "FDETAILBALANCE": false,
+        "FNOAMOUNT": false,
+        "FZEROANDNOBALANCE": true,
+        "FMULTITACCTBOOKID": [
+            {
+                "FNumber": "001"
+            }
+        ],
+        "FSHOWACCTONEVERYCOL": false,
+        "FSHOWZEROBALANCE": false,
+        "FSAMEDIRECTION": false,
+        "FEXCLUDEADJUSTVCH": false,
+        "FFORBIDBALANCE": true,
+        "FSHOWTOTAL": false,
+        "FSHOWFULLNAME": false,
+        "FSHOWQTY": false,
+        "FTOTALBYDAY": false,
+        "FCALBYDEFAULTUNIT": false,
+        "FEXCLUDEPROFITVCH": false,
+        "FSHOWCHILDDETAIL": true,
+        "FBalanceRadioGrp": "0",
+        "FACCTBOOKRadioGrp": "1"
+    }
+}
+
+
+
+

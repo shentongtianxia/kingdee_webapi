@@ -1,0 +1,43 @@
+{
+    "FieldKeys": "FCONTACTUNITNUMBER,FCONTACTUNITNAME,FSETTLEORGNAME,FCURRENCYFORNAME,FINITAMOUNTFOR,FAMOUNTFOR,FREALAMOUNTFOR,FOFFAMOUNTFOR,FLEFTAMOUNTFOR",
+    "SchemeId": "",
+    "StartRow": 0,
+    "Limit": 2000,
+    "IsVerifyBaseDataField": "true",
+    "FilterString": [],
+    "Model": {
+        "FSTARTYEAR": "2026",
+        "FENDYEAR": "2026",
+        "FCONTACTUNITTYPE": "BD_Supplier",
+        "FSTARTPERIOD": "2",
+        "FENDPERIOD": "2",
+        "FSettleOrgLst": "101",
+        "FInSettle": false,
+        "FOutSettle": true,
+        "FNoShowForNoLeft": false,
+        "FNoShowForNoOccur": false,
+        "FNOAUDIT": false,
+        "FEndDate": "2026-02-26 00:00:00",
+        "FBeginDate": "2026-01-01 00:00:00",
+        "FNoShowForBoth": false,
+        "FIncludePayEvaluate": false,
+        "FIncludePayEvaluate_New": false,
+        "FDEFAULTACCTCALENDARID": 1,
+        "FOnlyShowPayEvaluate": false,
+        "FOnlyShowPayEvaluate_New": false,
+        "FShowLocal": false,
+        "FShowSumLocal": false,
+        "FNoPrePayment": false,
+        "FOnlyShowPrePayment": false,
+        "FShowAmountInCost": false,
+        "FMULCONTACT": false,
+        "FGROUPSUPPLIER": false,
+        "FPERIODAMOUNT": -9999999999.0,
+        "FTOPERIODAMOUNT": 9999999999.0,
+        "FCheckPeriod": false,
+        "FShowMatchBill": false,
+        "FDateRadioGrp": "1"
+    }
+}
+
+

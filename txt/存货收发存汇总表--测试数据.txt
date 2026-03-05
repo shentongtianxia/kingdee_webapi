@@ -1,0 +1,72 @@
+{
+    "FieldKeys": "FMATERIALBASEID,FMATERIALNAME,FMATERIALGROUP,FMODEL,FSTOCKSTATUSNAME,FSTOCKId,FACCTGRANGEID,FACCTGRANGENAME,FINITQty,FINITPrice,FINITAMOUNT,FRECEIVEQty,FRECEIVEPrice,FRECEIVEAmount,FSENDQty,FSENDPrice,FSENDAmount,FENDQty,FENDPrice,FENDAmount",
+    "SchemeId": "",
+    "StartRow": 0,
+    "Limit": 2000,
+    "IsVerifyBaseDataField": "true",
+    "FilterString": [],
+    "Model": {
+        "FACCTGSYSTEMID": {
+            "FNumber": "KJHSTX01_SYS"
+        },
+        "FACCTGORGID": {
+            "FNumber": "100"
+        },
+        "FACCTPOLICYID": {
+            "FNumber": "KJZC01_SYS"
+        },
+        "FYear": "2025",
+        "FPeriod": "1",
+        "FENDYEAR": "2026",
+        "FEndPeriod": "1",
+        "FCOMBOTotalType": "0",
+        "FDimType": "1",
+        "FCHXEXPENSE": false,
+        "FCHXTotal": false,
+        "FCHXNOINOUT": false,
+        "FCHXNOCOSTALLOT": false,
+        "FIsDisplayPeriod": false,
+        "FCHXNOSTOCKADJ": false,
+        "FCOMBOSTATUS": "C",
+        "FCURRENCYID": {
+            "FNumber": "PRE001"
+        }
+    }
+}
+
+--------------
+{
+    "FieldKeys": "FYearPeriod,FMATERIALBASEID,FMATERIALNAME,FMATERIALGROUP,FMODEL,FSTOCKSTATUSNAME,FSTOCKId,FACCTGRANGEID,FACCTGRANGENAME,FEXPENSEID,FEXPENSENAME,FINITQty,FINITPrice,FINITAMOUNT,FRECEIVEQty,FRECEIVEPrice,FRECEIVEAmount,FSENDQty,FSENDPrice,FSENDAmount,FENDQty,FENDPrice,FENDAmount",
+    "SchemeId": "",
+    "StartRow": 0,
+    "Limit": 2000,
+    "IsVerifyBaseDataField": "true",
+    "FilterString": [],
+    "Model": {
+        "FACCTGSYSTEMID": {
+            "FNumber": "KJHSTX01_SYS"
+        },
+        "FACCTGORGID": {
+            "FNumber": "100"
+        },
+        "FACCTPOLICYID": {
+            "FNumber": "KJZC01_SYS"
+        },
+        "FYear": "2025",
+        "FPeriod": "1",
+        "FENDYEAR": "2026",
+        "FEndPeriod": "1",
+        "FCOMBOTotalType": "0",
+        "FDimType": "1",
+        "FCHXEXPENSE": false,
+        "FCHXTotal": false,
+        "FCHXNOINOUT": false,
+        "FCHXNOCOSTALLOT": false,
+        "FIsDisplayPeriod": false,
+        "FCHXNOSTOCKADJ": false,
+        "FCOMBOSTATUS": "C",
+        "FCURRENCYID": {
+            "FNumber": "PRE001"
+        }
+    }
+}
