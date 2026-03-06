@@ -746,7 +746,12 @@ public class KingdeeDataSetServiceImpl implements KingdeeDataSetService {
                     break;
                 }
                 
-                allResults.addAll(batch);
+                // 将数组转换为对象格式
+                List<Map<String, Object>> objectBatch = convertToObjectFormat(batch, fieldKeys);
+                // 这里我们需要累积对象而不是数组
+                for (Map<String, Object> obj : objectBatch) {
+                    allResults.add(convertMapToList(obj));
+                }
                 
                 // 如果返回的数据少于 batchSize，说明已经是最后一页
                 if (batch.size() < batchSize) {
@@ -777,9 +782,12 @@ public class KingdeeDataSetServiceImpl implements KingdeeDataSetService {
             
             List<List<Object>> result = client.executeBillQuery(queryParam.toJSONString());
             
+            // 将数组格式转换为对象格式
+            List<Map<String, Object>> objectResult = convertToObjectFormat(result, fieldKeys);
+            
             JSONObject finalResponse = new JSONObject();
-            finalResponse.put("totalCount", result != null ? result.size() : 0);
-            finalResponse.put("data", result);
+            finalResponse.put("totalCount", objectResult != null ? objectResult.size() : 0);
+            finalResponse.put("data", objectResult);
             return finalResponse.toJSONString();
         }
     }
@@ -1454,5 +1462,59 @@ public class KingdeeDataSetServiceImpl implements KingdeeDataSetService {
         } catch (Exception e) {
             return "解析错误失败: " + e.getMessage();
         }
+    }
+
+    /**
+     * 将数组格式的数据转换为对象格式
+     * @param arrayData 数组格式的数据
+     * @param fieldKeys 字段键，逗号分隔
+     * @return 对象格式的数据列表
+     */
+    private List<Map<String, Object>> convertToObjectFormat(List<List<Object>> arrayData, String fieldKeys) {
+        if (arrayData == null || arrayData.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
+        // 解析字段键
+        String[] fields = fieldKeys.split(",");
+        List<String> fieldList = new ArrayList<>();
+        for (String field : fields) {
+            fieldList.add(field.trim());
+        }
+        
+        List<Map<String, Object>> result = new ArrayList<>();
+        
+        for (List<Object> row : arrayData) {
+            Map<String, Object> objectRow = new LinkedHashMap<>();
+            
+            for (int i = 0; i < fieldList.size() && i < row.size(); i++) {
+                String fieldName = fieldList.get(i);
+                Object value = row.get(i);
+                
+                // 简化字段名
+                String simplifiedName = fieldName.replaceAll("^F", "").toLowerCase();
+                simplifiedName = camelToSnake(simplifiedName);
+                
+                objectRow.put(simplifiedName, value);
+            }
+            
+            result.add(objectRow);
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 将驼峰式命名转换为下划线式命名
+     */
+    private String camelToSnake(String str) {
+        return str.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+    }
+    
+    /**
+     * 将 Map 转换回 List（用于兼容旧格式）
+     */
+    private List<Object> convertMapToList(Map<String, Object> map) {
+        return new ArrayList<>(map.values());
     }
 }

@@ -1641,13 +1641,23 @@ public class ReportController {
         JSONObject requestObj = JSON.parseObject(rawJson);
         String fieldKeysStr = requestObj.getString("FieldKeys");
 
+        // 如果没有提供FieldKeys，使用默认值（包含期间字段和主要财务指标）
+        if (fieldKeysStr == null || fieldKeysStr.trim().isEmpty()) {
+            fieldKeysStr = "FYearPeriod,FPRODUCTID,FPRODUCTNAME,FPRODUCTMODEL,FSALEQTY,FSALEPRICE,FSALEAMOUNT,FCOSTAMOUNT,FSALESPROFIT,FPROFITRATE,FSALENETINCOME,FNETINCOMERATE";
+            requestObj.put("FieldKeys", fieldKeysStr);
+            // 使用修改后的JSON发送给金蝶
+            rawJson = requestObj.toJSONString();
+            System.err.println("===== 使用默认FieldKeys =====");
+            System.err.println(rawJson);
+        }
+
         // 建立FieldKey到中文字段名的映射
         HashMap<String, String> fieldKeyToChinese = getProductProfitAnalysisFieldKeyMapping();
 
         // 解析FieldKeys
         String[] fieldKeys = fieldKeysStr != null ? fieldKeysStr.split(",") : new String[0];
 
-        // 直接使用原始JSON发送给金蝶
+        // 直接使用JSON发送给金蝶
         String formId = "CB_PROSALEPROFITRPT";
         String resultJson = client.getSysReportData(formId, rawJson);
         System.err.println("===== 金蝶返回结果 =====");
